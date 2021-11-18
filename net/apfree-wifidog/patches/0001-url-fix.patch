@@ -1,0 +1,29 @@
+--- a/src/ping_thread.c	2021-11-17 18:51:58.406331155 +0900
++++ b/src/ping_thread.c	2021-11-18 12:46:11.792489270 +0900
+@@ -124,7 +124,7 @@
+ 		return NULL;
+ 	
+ 	int nret = safe_asprintf(&uri, 
+-			"%s%sgw_id=%s&sys_uptime=%lu&sys_memfree=%u&sys_load=%.2f&nf_conntrack_count=%lu&cpu_usage=%3.2lf%%&wifidog_uptime=%lu&online_clients=%d&offline_clients=%d&ssid=%s&version=%s&type=%s&name=%s&channel_path=%s&wired_passed=%d",
++			"%s%sgw_id=%s&sys_uptime=%lu&sys_memfree=%u&sys_load=%.2f&nf_conntrack_count=%lu&cpu_usage=%3.2lf&wifidog_uptime=%lu&online_clients=%d&offline_clients=%d&ssid=%s&version=%s&type=%s&name=%s&channel_path=%s&wired_passed=%d",
+ 			 auth_server->authserv_path,
+              auth_server->authserv_ping_
+
+--- a/src/conf.h      2021-11-18 13:09:03.099056356 +0900
++++ b/src/conf.h  2021-11-18 13:10:35.252014907 +0900
+@@ -67,11 +67,11 @@
+ #define DEFAULT_AUTHSERVSSLAVAILABLE 0
+ /** Note:  The path must be prefixed by /, and must be suffixed /.  Put / for the server root.*/
+ #define DEFAULT_AUTHSERVPATH "/wifidog/"
+-#define DEFAULT_AUTHSERVLOGINPATHFRAGMENT "login/?"
+-#define DEFAULT_AUTHSERVPORTALPATHFRAGMENT "portal/?"
++#define DEFAULT_AUTHSERVLOGINPATHFRAGMENT "login?"
++#define DEFAULT_AUTHSERVPORTALPATHFRAGMENT "portal?"
+ #define DEFAULT_AUTHSERVMSGPATHFRAGMENT "gw_message?"
+-#define DEFAULT_AUTHSERVPINGPATHFRAGMENT "ping/?"
+-#define DEFAULT_AUTHSERVAUTHPATHFRAGMENT "auth/?"
++#define DEFAULT_AUTHSERVPINGPATHFRAGMENT "ping?"
++#define DEFAULT_AUTHSERVAUTHPATHFRAGMENT "auth?"
+ /** Note that DEFAULT_AUTHSERVSSLNOPEERVER must be 0 or 1, even if the config file syntax is yes or no */
+ #define DEFAULT_AUTHSERVSSLPEERVER 1    /* 0 means: Enable peer verification */
+ #define DEFAULT_DELTATRAFFIC 0    /* 0 means: Enable peer verification */
