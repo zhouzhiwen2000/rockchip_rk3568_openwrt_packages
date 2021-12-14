@@ -20,7 +20,7 @@ include $(INCLUDE_DIR)/package.mk
 include $(INCLUDE_DIR)/nls.mk
 include ../../devel/meson/meson.mk
 
-define Package/pcat-manager/Default
+define Package/pcat-manager
   SECTION:=utils
   CATEGORY:=Utilities
   DEPENDS:=+glib2
@@ -29,7 +29,7 @@ define Package/pcat-manager/Default
   PROVIDES:=pcat-manager
 endef
 
-define Package/pcat-manager/Default/description
+define Package/pcat-manager/description
   PCat Manager is a system service for power management and modem controlling.
 endef
 
