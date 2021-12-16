@@ -51,8 +51,8 @@ define Build/InstallDev
 endef
 
 define Package/libxcrypt/install
-	$(INSTALL_DIR) $(1)/lib
-	$(CP) $(PKG_INSTALL_DIR)/lib/libcrypt.so.* $(1)/lib
+	$(INSTALL_DIR) $(1)/usr/lib
+	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libcrypt.so* $(1)/usr/lib
 endef
 
 $(eval $(call BuildPackage,libxcrypt))
