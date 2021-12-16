@@ -22,7 +22,6 @@ define Package/libxcrypt
   CATEGORY:=Libraries
   URL:=https://github.com/besser82/libxcrypt
   TITLE:=Extended crypt library
-  BUILDONLY:=1
 endef
 
 define Package/libxcrypt/description
@@ -36,12 +35,10 @@ define Package/libxcrypt/description
 endef
 
 CONFIGURE_ARGS += \
-	--disable-shared \
 	--disable-failure-tokens \
 	--disable-xcrypt-compat-files \
 	--disable-obsolete-api \
-	--enable-hashes=solaris \
-	--with-pic
+	--enable-hashes=all
 
 define Build/InstallDev
 	$(INSTALL_DIR) $(1)/usr/include
@@ -50,6 +47,11 @@ define Build/InstallDev
 	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libcrypt.{a,la} $(1)/usr/lib/libxcrypt
 	$(INSTALL_DIR) $(1)/usr/lib/pkgconfig
 	$(CP) $(PKG_INSTALL_DIR)/usr/lib/pkgconfig/*crypt.pc $(1)/usr/lib/pkgconfig/
+endef
+
+define Package/libxcrypt/install
+	$(INSTALL_DIR) $(1)/lib
+	$(CP) $(PKG_INSTALL_DIR)/lib/libcrypt.so.* $(1)/lib
 endef
 
 $(eval $(call BuildPackage,libxcrypt))
