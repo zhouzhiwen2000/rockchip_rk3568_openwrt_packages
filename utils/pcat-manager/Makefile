@@ -23,7 +23,7 @@ include ../../devel/meson/meson.mk
 define Package/pcat-manager
   SECTION:=utils
   CATEGORY:=Utilities
-  DEPENDS:=+glib2
+  DEPENDS:=+glib2 +libgpiod +libjson-c
   TITLE:=PCat System Manager
   URL:=https://git.g77k.com
   PROVIDES:=pcat-manager
