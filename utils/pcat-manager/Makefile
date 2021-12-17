@@ -40,7 +40,7 @@ define Package/pcat-manager/install
 		$(1)/usr/bin/pcat-manager
 
 	$(INSTALL_DIR) $(1)/etc/init.d
-	$(INSTALL_BIN) ./files/pcat-monitor.init $(1)/etc/init.d/pcat-monitor
+	$(INSTALL_BIN) ./files/pcat-manager.init $(1)/etc/init.d/pcat-manager
 endef
 
 
