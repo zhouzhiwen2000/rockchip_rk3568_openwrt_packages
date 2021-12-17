@@ -34,12 +34,13 @@ define Package/pcat-manager/description
 endef
 
 define Package/pcat-manager/install
-	$(INSTALL_DIR) \
-		$(1)/usr/bin
-
+	$(INSTALL_DIR) $(1)/usr/bin
 	$(INSTALL_BIN) \
 		$(PKG_INSTALL_DIR)/usr/bin/pcat-manager \
 		$(1)/usr/bin/pcat-manager
+
+        $(INSTALL_DIR) $(1)/etc/init.d
+        $(INSTALL_BIN) ./files/pcat-monitor.init $(1)/etc/init.d/pcat-monitor
 endef
 
 
