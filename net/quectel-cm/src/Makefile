@@ -7,7 +7,7 @@ CC:=$(CROSS-COMPILE)gcc
 endif
 
 LD:=$(CROSS-COMPILE)ld
-STRIP:=(CROSS-COMPILE)strip
+STRIP:=$(CROSS-COMPILE)strip
 
 QL_CM_SRC=QmiWwanCM.c GobiNetCM.c main.c MPQMUX.c QMIThread.c util.c qmap_bridge_mode.c mbim-cm.c device.c
 QL_CM_SRC+=atc.c atchannel.c at_tok.c
@@ -21,7 +21,7 @@ QL_CM_DHCP=udhcpc_netlink.c
 QL_CM_DHCP+=${LIBMNL}
 endif
 
-CFLAGS += -Wall -Werror -O2 #-s
+CFLAGS += -Wall -Werror -Wno-format-truncation -O2 #-s
 LDFLAGS += -lpthread -ldl -lrt
 
 all: release

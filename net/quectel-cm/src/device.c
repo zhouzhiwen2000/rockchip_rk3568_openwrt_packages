@@ -95,6 +95,7 @@ static int dir_get_child(const char *dirname, char *buff, unsigned bufsize, cons
         if (prefix && strlen(prefix) && strncmp(entptr->d_name, prefix, strlen(prefix)))
             continue;
         snprintf(buff, bufsize, "%s", entptr->d_name);
+        buff[bufsize-1] = 0;
         break;
     }
     closedir(dirptr);
