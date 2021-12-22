@@ -28,7 +28,7 @@ define Build/Configure
 endef
 
 define Build/Compile
-	$(MAKE) CROSS_COMPILE="$(TARGET_CROSS)" release
+	$(MAKE) CROSS_COMPILE="$(TARGET_CROSS)"
 endef
 
 define Package/quectel-cm/install

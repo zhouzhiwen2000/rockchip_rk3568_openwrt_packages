@@ -24,6 +24,8 @@ endif
 CFLAGS += -Wall -Werror -O2 #-s
 LDFLAGS += -lpthread -ldl -lrt
 
+all: release
+
 release: clean qmi-proxy mbim-proxy
 	$(CC) ${CFLAGS} ${QL_CM_SRC} ${QL_CM_DHCP} -o quectel-cm ${LDFLAGS}
 	$(STRIP) quectel-cm
@@ -31,7 +33,7 @@ release: clean qmi-proxy mbim-proxy
 	$(STRIP) quectel-mbim-proxy
 
 debug: clean
-	$(CC) ${CFLAGS} -g -DCM_DEBUG ${QL_CM_SRC} ${QL_CM_DHCP} -o quectel-cm -lpthread -ldl -lrt
+	$(CC) ${CFLAGS} -g -DCM_DEBUG ${QL_CM_SRC} ${QL_CM_DHCP} -o quectel-cm ${LDFLAGS}
 
 qmi-proxy:
 	$(CC) ${CFLAGS} quectel-qmi-proxy.c -o quectel-qmi-proxy ${LDFLAGS} 
