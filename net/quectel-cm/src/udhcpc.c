@@ -35,10 +35,16 @@ static int ql_system(const char *shell_cmd) {
     return system(shell_cmd);
 }
 
+static inline char *mystrncpy(char *dest, const char *src, size_t n) {
+    memset(dest, 0, n);
+    memcpy(dest, src, strnlen(src, n-1));
+    return dest;
+}
+
 static void ifc_init_ifr(const char *name, struct ifreq *ifr)
 {
     memset(ifr, 0, sizeof(struct ifreq));
-    strncpy(ifr->ifr_name, name, IFNAMSIZ);
+    mystrncpy(ifr->ifr_name, name, IFNAMSIZ);
     ifr->ifr_name[IFNAMSIZ - 1] = 0;
 }
 

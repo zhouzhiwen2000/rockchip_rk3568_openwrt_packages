@@ -120,7 +120,8 @@ static int is_same_linkfile(const char *dir, const char *file,  void *argv[])
     char filename[MAX_PATH];
     int linksize;
 
-    snprintf(linkname, MAX_PATH, "%s/%s", dir, file);
+    snprintf(linkname, MAX_PATH-1, "%s/%s", dir, file);
+    linkname[MAX_PATH-1] = 0;
     linksize = readlink(linkname, filename, MAX_PATH);
     if (linksize <= 0)
         return 0;
@@ -154,7 +155,8 @@ static int is_brother_process(const char *dir, const char *file, void *argv[])
         return 0;
     }
 
-    snprintf(linkname, MAX_PATH, "%s/%s/exe", dir, file);
+    snprintf(linkname, MAX_PATH-1, "%s/%s/exe", dir, file);
+    linkname[MAX_PATH-1] = 0;
     linksize = readlink(linkname, filename, MAX_PATH);
     if (linksize <= 0)
         return 0;
@@ -165,7 +167,8 @@ static int is_brother_process(const char *dir, const char *file, void *argv[])
     if (pid >= getpid())
         return 0;
 
-    snprintf(linkname, MAX_PATH, "%s/%s/fd", dir, file);
+    snprintf(linkname, MAX_PATH-1, "%s/%s/fd", dir, file);
+    linkname[MAX_PATH-1] = 0;
     if (!ls_dir(linkname, is_same_linkfile, argv))
         return 0;
 
@@ -637,10 +640,10 @@ static int quectel_CM(PROFILE_T *profile)
     char qmichannel[32+1] = {'\0'};
     char usbnet_adapter[32+1] = {'\0'};
 
-    if (profile->expect_adapter[0])
+    if (profile->expect_adapter[0]) {
         strncpy(usbnet_adapter, profile->expect_adapter, sizeof(usbnet_adapter));
-	usbnet_adapter[32] = 0;
-    
+	usbnet_adapter[sizeof(usbnet_adapter)-1] = 0;
+    }
     if (qmidevice_detect(qmichannel, usbnet_adapter, sizeof(qmichannel), profile)) {
     	profile->hardware_interface = HARDWARE_USB;
     }
@@ -808,7 +811,7 @@ static int parse_user_input(int argc, char **argv, PROFILE_T *profile) {
             case 'i':
                 if (has_more_argv()) {
                     strncpy(profile->expect_adapter, argv[opt++], sizeof(profile->expect_adapter));
-                    profile->expect_adapter[sizeof(profile->expect_adapter)] = 0;
+                    profile->expect_adapter[sizeof(profile->expect_adapter)-1] = 0;
                 }
             break;
 
