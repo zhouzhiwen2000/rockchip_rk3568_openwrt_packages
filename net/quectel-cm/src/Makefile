@@ -1,13 +1,13 @@
 ifneq ($(CROSS_COMPILE),)
 CROSS-COMPILE:=$(CROSS_COMPILE)
 endif
-#CROSS-COMPILE:=/workspace/buildroot/buildroot-qemu_mips_malta_defconfig/output/host/usr/bin/mips-buildroot-linux-uclibc-
-#CROSS-COMPILE:=/workspace/buildroot/buildroot-qemu_arm_vexpress_defconfig/output/host/usr/bin/arm-buildroot-linux-uclibcgnueabi-
-#CROSS-COMPILE:=/workspace/buildroot-git/qemu_mips64_malta/output/host/usr/bin/mips-gnu-linux-
+
 ifeq ($(CC),cc)
 CC:=$(CROSS-COMPILE)gcc
 endif
+
 LD:=$(CROSS-COMPILE)ld
+STRIP:=(CROSS-COMPILE)strip
 
 QL_CM_SRC=QmiWwanCM.c GobiNetCM.c main.c MPQMUX.c QMIThread.c util.c qmap_bridge_mode.c mbim-cm.c device.c
 QL_CM_SRC+=atc.c atchannel.c at_tok.c
@@ -21,14 +21,17 @@ QL_CM_DHCP=udhcpc_netlink.c
 QL_CM_DHCP+=${LIBMNL}
 endif
 
-CFLAGS += -Wall -Werror -O1 #-s
+CFLAGS += -Wall -Werror -O2 #-s
 LDFLAGS += -lpthread -ldl -lrt
 
 release: clean qmi-proxy mbim-proxy
-	$(CC) ${CFLAGS} ${QL_CM_SRC} ${QL_CM_DHCP} -o quectel-CM ${LDFLAGS}
+	$(CC) ${CFLAGS} ${QL_CM_SRC} ${QL_CM_DHCP} -o quectel-cm ${LDFLAGS}
+	$(STRIP) quectel-cm
+	$(STRIP) quectel-qmi-proxy
+	$(STRIP) quectel-mbim-proxy
 
 debug: clean
-	$(CC) ${CFLAGS} -g -DCM_DEBUG ${QL_CM_SRC} ${QL_CM_DHCP} -o quectel-CM -lpthread -ldl -lrt
+	$(CC) ${CFLAGS} -g -DCM_DEBUG ${QL_CM_SRC} ${QL_CM_DHCP} -o quectel-cm -lpthread -ldl -lrt
 
 qmi-proxy:
 	$(CC) ${CFLAGS} quectel-qmi-proxy.c -o quectel-qmi-proxy ${LDFLAGS} 
