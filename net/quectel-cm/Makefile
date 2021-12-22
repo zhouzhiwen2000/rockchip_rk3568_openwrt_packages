@@ -1,4 +1,4 @@
-#
+7#
 # Copyright (C) 2012 Jo-Philipp Wich <jo@mein.io>
 #
 # This is free software, licensed under the Apache 2 license.
@@ -27,10 +27,8 @@ endef
 define Build/Configure
 endef
 
-MAKE_OPTS:= CROSS_COMPILE="$(TARGET_CROSS)"
-
 define Build/Compile
-	$(MAKE)
+	$(MAKE) CROSS_COMPILE="$(TARGET_CROSS)"
 endef
 
 define Package/quectel-cm/install
