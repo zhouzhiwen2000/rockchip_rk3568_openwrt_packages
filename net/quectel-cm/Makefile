@@ -28,12 +28,14 @@ define Build/Configure
 endef
 
 define Build/Compile
-	$(MAKE) CROSS_COMPILE="$(TARGET_CROSS)"
+	$(MAKE) CROSS_COMPILE="$(TARGET_CROSS)" release
 endef
 
 define Package/quectel-cm/install
 	$(INSTALL_DIR) $(1)/usr/bin
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/quectel-cm $(1)/usr/bin/quectel-cm
+	$(INSTALL_BIN) $(PKG_BUILD_DIR)/quectel-qmi-proxy $(1)/usr/bin/quectel-qmi-proxy
+	$(INSTALL_BIN) $(PKG_BUILD_DIR)/quectel-mbim-proxy $(1)/usr/bin/quectel-mbim-proxy
 endef
 
 $(eval $(call BuildPackage,quectel-cm))
