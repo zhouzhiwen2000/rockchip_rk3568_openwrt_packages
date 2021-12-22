@@ -639,6 +639,7 @@ static int quectel_CM(PROFILE_T *profile)
 
     if (profile->expect_adapter[0])
         strncpy(usbnet_adapter, profile->expect_adapter, sizeof(usbnet_adapter));
+	usbnet_adapter[32] = 0;
     
     if (qmidevice_detect(qmichannel, usbnet_adapter, sizeof(qmichannel), profile)) {
     	profile->hardware_interface = HARDWARE_USB;
@@ -663,7 +664,9 @@ static int quectel_CM(PROFILE_T *profile)
     }
 
     strncpy(profile->qmichannel, qmichannel, sizeof(profile->qmichannel));
+    profile->qmichannel[sizeof(profile->qmichannel)-1] = 0;
     strncpy(profile->usbnet_adapter, usbnet_adapter, sizeof(profile->usbnet_adapter));
+    profile->usbnet_adapter[sizeof(profile->usbnet_adapter)-1] = 0;
     ql_get_netcard_driver_info(profile->usbnet_adapter);
 
     if ((profile->hardware_interface == HARDWARE_USB) && profile->usblogfile)
@@ -774,6 +777,7 @@ static int parse_user_input(int argc, char **argv, PROFILE_T *profile) {
                     if (!strcmp(arg, QUECTEL_QMI_PROXY) || !strcmp(arg, QUECTEL_MBIM_PROXY)
                         || !strcmp(arg, LIBQMI_PROXY) || !strcmp(arg, LIBMBIM_PROXY)) {
                         strncpy(profile->proxy, arg, sizeof(profile->proxy));
+                        profile->proxy[sizeof(profile->proxy)-1] = 0;
                     }
                     else if ((999 < atoi(arg)) && (atoi(arg) < 10000)) {
                         profile->pincode = arg;
@@ -804,6 +808,7 @@ static int parse_user_input(int argc, char **argv, PROFILE_T *profile) {
             case 'i':
                 if (has_more_argv()) {
                     strncpy(profile->expect_adapter, argv[opt++], sizeof(profile->expect_adapter));
+                    profile->expect_adapter[sizeof(profile->expect_adapter)] = 0;
                 }
             break;
 

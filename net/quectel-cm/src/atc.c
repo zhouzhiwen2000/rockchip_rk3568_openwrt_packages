@@ -232,6 +232,7 @@ static int requestBaseBandVersion(PROFILE_T *profile) {
 
     if (p_response->p_intermediates && p_response->p_intermediates->line) {
         strncpy(profile->BaseBandVersion, p_response->p_intermediates->line, sizeof(profile->BaseBandVersion));
+        profile->BaseBandVersion[sizeof(profile->BaseBandVersion)-1] = 0;
         retVal = 0;
     }
 
@@ -463,8 +464,11 @@ _error:
     if (!old_password) old_password = "";
 
     strncpy(profile->old_apn, old_apn, sizeof(profile->old_apn));
+    profile->old_apn[sizeof(profile->old_apn)-1] = 0;
     strncpy(profile->old_user, old_user, sizeof(profile->old_user));
+    profile->old_user[sizeof(profile->old_user)-1] = 0;
     strncpy(profile->old_password, old_password, sizeof(profile->old_password));
+    profile->old_password[sizeof(profile->old_password)-1] = 0;
     profile->old_auth = old_auth;
     profile->old_iptype = old_iptype; 
 

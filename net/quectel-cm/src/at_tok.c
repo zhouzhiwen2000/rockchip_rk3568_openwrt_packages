@@ -220,6 +220,7 @@ int at_tok_scanf(const char *in_line, const char *fmt, ...)
         return 0;
 
     strncpy(s_line, in_line, sizeof(s_line));
+    s_line[sizeof(s_line)-1] = 0;
 
     va_start(ap, fmt);
 
