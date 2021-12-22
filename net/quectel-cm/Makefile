@@ -1,4 +1,4 @@
-7#
+#
 # Copyright (C) 2012 Jo-Philipp Wich <jo@mein.io>
 #
 # This is free software, licensed under the Apache 2 license.
