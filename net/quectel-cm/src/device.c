@@ -191,6 +191,7 @@ static void query_usb_interface_info(char *path, struct usb_interface_info *p) {
             n--;
         }
         strncpy(p->driver, &driver[n+1], sizeof(p->driver));
+        p->driver[sizeof(p->driver)-1] = 0;
     }
 
     path[offset] = '\0';

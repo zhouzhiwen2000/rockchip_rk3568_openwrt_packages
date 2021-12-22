@@ -42,4 +42,4 @@ mbim-proxy:
 	$(CC) ${CFLAGS} quectel-mbim-proxy.c -o quectel-mbim-proxy ${LDFLAGS} 
 
 clean:
-	rm -rf *.o libmnl/*.o quectel-CM quectel-qmi-proxy quectel-mbim-proxy
+	rm -rf *.o libmnl/*.o quectel-cm quectel-qmi-proxy quectel-mbim-proxy

@@ -1835,6 +1835,7 @@ static int mbim_device_caps_query(PROFILE_T *profile) {
          if (le32toh(pInfo->FirmwareInfoOffset) && le32toh(pInfo->FirmwareInfoSize)) {
             wchar2char((const char *)pInfo + le32toh(pInfo->FirmwareInfoOffset), le32toh(pInfo->FirmwareInfoSize), tmp, sizeof(tmp));
             strncpy(profile->BaseBandVersion, tmp, sizeof(profile->BaseBandVersion));
+            profile->BaseBandVersion[sizeof(profile->BaseBandVersion)-1] = 0;
             mbim_debug("FirmwareInfo: %s", tmp);
          }
          if (le32toh(pInfo->HardwareInfoOffset) && le32toh(pInfo->HardwareInfoSize)) {

@@ -177,6 +177,7 @@ static int ql_qmi_qmap_mode_detect(PROFILE_T *profile) {
     while (pl->filename[n] != '/')
         n--;
     strncpy(profile->driver_name, &pl->filename[n+1], sizeof(profile->driver_name));
+    profile->driver_name[sizeof(profile->driver_name)-1] = 0;
 
     ql_get_driver_rmnet_info(profile, &profile->rmnet_info);
     if (profile->rmnet_info.size) {
@@ -188,6 +189,7 @@ static int ql_qmi_qmap_mode_detect(PROFILE_T *profile) {
                 offset_id = 0;
             profile->muxid = profile->rmnet_info.mux_id[offset_id];
             strncpy(profile->qmapnet_adapter, profile->rmnet_info.ifname[offset_id], sizeof(profile->qmapnet_adapter));
+            profile->qmapnet_adapter[sizeof(profile->qmapnet_adapter)-1] = 0;
             profile->qmap_size = profile->rmnet_info.rx_urb_size;
             profile->qmap_version = profile->rmnet_info.qmap_version;
         }
@@ -232,6 +234,7 @@ static int ql_qmi_qmap_mode_detect(PROFILE_T *profile) {
            } if (profile->qmap_mode == 1) {
                 profile->muxid = 0x81;
                 strncpy(profile->qmapnet_adapter, profile->usbnet_adapter, sizeof(profile->qmapnet_adapter));
+                profile->qmapnet_adapter[sizeof(profile->qmapnet_adapter)-1] = 0;
            }
         }
     }
@@ -335,6 +338,7 @@ static int ql_mbim_usb_vlan_mode_detect(PROFILE_T *profile) {
         profile->qmap_mode = 4;
         profile->muxid = profile->pdp;
         strncpy(profile->qmapnet_adapter, &tmp[strlen("/sys/class/net/")], sizeof(profile->qmapnet_adapter));
+        profile->qmapnet_adapter[sizeof(profile->qmapnet_adapter)-1] = 0;
 
         dbg_time("mbim_qmap_mode = %d, vlan_id = 0x%02x, qmap_netcard = %s",
             profile->qmap_mode, profile->muxid, profile->qmapnet_adapter);
