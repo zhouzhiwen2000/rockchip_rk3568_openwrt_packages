@@ -922,6 +922,10 @@ static int requestGetSignalInfo(void) {
                     nr5g_sa.ARFCN, nr5g_sa.band, nr5g_sa.NR_DL_bandwidth,
                     nr5g_sa.RSRP, nr5g_sa.RSRQ, nr5g_sa.RSSI, nr5g_sa.SINR);
             }
+
+            if (err >= 13) {
+                printf("CMD=SIGNALINFO,MODE=NR5G-SA,RSRQ=%d\n", nr5g_sa.RSRQ);
+            }
         }
         else if (!strcmp(rat, "NR5G-NSA"))
         {
@@ -940,6 +944,9 @@ static int requestGetSignalInfo(void) {
                 dbg_time("mcc=%s, mnc=%s, pcid=%d, rsrp=%d, sinr=%d, rsrq=%d",
                     nr5g_nsa.mcc, nr5g_nsa.mnc, nr5g_nsa.pcid, nr5g_nsa.rsrp, nr5g_nsa.sinr, nr5g_nsa.rsrq);
             }
+            if (err >= 8) {
+                printf("CMD=SIGNALINFO,MODE=NR5G-NSA,RSRQ=%d\n", nr5g_nsa.rsrq);
+            }
 
             is_nr5g_nsa = 1;
         }
@@ -954,25 +961,31 @@ static int requestGetSignalInfo(void) {
             struct qeng_servingcell_lte lte;
 
             memset(&lte, 0, sizeof(lte));
-            if (!strcmp(rat, state))
+            if (!strcmp(rat, state)) {
                 err = at_tok_scanf(p_cur->line, "%s%s%s%s%s%x%d%d%d%d%d%x%d%d%d%d%d%d%d",
                     NULL, NULL, &lte.is_tdd, &lte.mcc, &lte.mnc,
                     &lte.cellID, &lte.pcid, &lte.earfcn, &lte.freq_band_ind, &lte.ul_bandwidth, &lte.dl_bandwidth,
                     &lte.tac, &lte.rsrp, &lte.rsrq, &lte.rssi, &lte.sinr, &lte.cqi, &lte.tx_power, &lte.srxlev);
-            else
-                 err = at_tok_scanf(p_cur->line, "%s%s%s%s%s%s%x%d%d%d%d%d%x%d%d%d%d%d%d%d",
+            } else {
+                err = at_tok_scanf(p_cur->line, "%s%s%s%s%s%s%x%d%d%d%d%d%x%d%d%d%d%d%d%d",
                     NULL, NULL, NULL, &lte.is_tdd, &lte.mcc, &lte.mnc,
                     &lte.cellID, &lte.pcid, &lte.earfcn, &lte.freq_band_ind, &lte.ul_bandwidth, &lte.dl_bandwidth,
                     &lte.tac, &lte.rsrp, &lte.rsrq, &lte.rssi, &lte.sinr, &lte.cqi, &lte.tx_power, &lte.srxlev);
-            
-                if (err >= 18 && verbose)
-                {
-                    dbg_time("is_tdd=%s, mcc=%s, mnc=%s", lte.is_tdd, lte.mcc, lte.mnc);
-                    dbg_time("cellID=%x, pcid=%d, earfcn=%d", lte.cellID, lte.pcid, lte.earfcn);
-                    dbg_time("freq_band_ind=%d, ul_bandwidth=%d, dl_bandwidth=%d", lte.freq_band_ind, lte.ul_bandwidth, lte.dl_bandwidth);
-                    dbg_time("tac=%x, rsrp=%d, rsrq=%d, rssi=%d, sinr=%d", lte.tac, lte.rsrp, lte.rsrq, lte.rssi, lte.sinr);
-                    dbg_time("cqi=%d, tx_power=%d, earfcn=%d", lte.cqi, lte.tx_power, lte.srxlev);
-                }
+            }
+
+            if (err >= 18 && verbose)
+            {
+                dbg_time("is_tdd=%s, mcc=%s, mnc=%s", lte.is_tdd, lte.mcc, lte.mnc);
+                dbg_time("cellID=%x, pcid=%d, earfcn=%d", lte.cellID, lte.pcid, lte.earfcn);
+                dbg_time("freq_band_ind=%d, ul_bandwidth=%d, dl_bandwidth=%d", lte.freq_band_ind, lte.ul_bandwidth, lte.dl_bandwidth);
+                dbg_time("tac=%x, rsrp=%d, rsrq=%d, rssi=%d, sinr=%d", lte.tac, lte.rsrp, lte.rsrq, lte.rssi, lte.sinr);
+                dbg_time("cqi=%d, tx_power=%d, earfcn=%d", lte.cqi, lte.tx_power, lte.srxlev);
+            }
+
+            if (err >= 18) {
+                printf("CMD=SIGNALINFO,MODE=LTE,RSRQ=%d\n", lte.rsrq);
+            }
+
         }
     }
 
