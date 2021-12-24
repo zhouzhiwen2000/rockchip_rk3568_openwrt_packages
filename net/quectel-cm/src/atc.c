@@ -925,6 +925,7 @@ static int requestGetSignalInfo(void) {
 
             if (err >= 13) {
                 printf("CMD=SIGNALINFO,MODE=NR5G-SA,RSRQ=%d\n", nr5g_sa.RSRQ);
+                fflush(stdout);
             }
         }
         else if (!strcmp(rat, "NR5G-NSA"))
@@ -946,6 +947,7 @@ static int requestGetSignalInfo(void) {
             }
             if (err >= 8) {
                 printf("CMD=SIGNALINFO,MODE=NR5G-NSA,RSRQ=%d\n", nr5g_nsa.rsrq);
+                fflush(stdout);
             }
 
             is_nr5g_nsa = 1;
@@ -984,6 +986,7 @@ static int requestGetSignalInfo(void) {
 
             if (err >= 18) {
                 printf("CMD=SIGNALINFO,MODE=LTE,RSRQ=%d\n", lte.rsrq);
+                fflush(stdout);
             }
 
         }

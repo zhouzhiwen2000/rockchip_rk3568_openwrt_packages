@@ -2141,6 +2141,7 @@ static int requestGetSignalInfo(void)
                 ptlv->rssi, (-0.5) * (double)ptlv->ecio);
 
             printf("CMD=SIGNALINFO,MODE=CDMA,RSSI=%d\n", ptlv->rssi);
+            fflush(stdout);
         }
     }
 
@@ -2153,6 +2154,7 @@ static int requestGetSignalInfo(void)
                 ptlv->rssi, (-0.5) * (double)ptlv->ecio, ptlv->io);
 
             printf("CMD=SIGNALINFO,MODE=HDR,RSSI=%d\n", ptlv->rssi);
+            fflush(stdout);
         }
     }
 
@@ -2164,6 +2166,7 @@ static int requestGetSignalInfo(void)
             dbg_time("%s GSM: RSSI %d dBm", __func__, ptlv->rssi);
 
             printf("CMD=SIGNALINFO,MODE=GSM,RSSI=%d\n", ptlv->rssi);
+            fflush(stdout);
         }
     }
 
@@ -2176,6 +2179,7 @@ static int requestGetSignalInfo(void)
                 ptlv->rssi, (-0.5) * (double)ptlv->ecio);
 
             printf("CMD=SIGNALINFO,MODE=WCDMA,RSSI=%d\n", ptlv->rssi);
+            fflush(stdout);
         }
     }
 
@@ -2188,6 +2192,7 @@ static int requestGetSignalInfo(void)
                 ptlv->rssi, ptlv->rsrq, ptlv->rsrp, (0.1) * (double)ptlv->snr);
 
             printf("CMD=SIGNALINFO,MODE=LTE,RSSI=%d,RSRQ=%d\n", ptlv->rssi, ptlv->rsrq);
+            fflush(stdout);
         }
     }
 
@@ -2199,6 +2204,7 @@ static int requestGetSignalInfo(void)
             dbg_time("%s LTE: RSCP %d dBm", __func__, ptlv->rscp);
 
             printf("CMD=SIGNALINFO,MODE=TDSCDMA,RSCP=%d\n", ptlv->rscp);
+            fflush(stdout);
         }
     }
 
@@ -2211,6 +2217,7 @@ static int requestGetSignalInfo(void)
             dbg_time("%s 5G_NSA: RSRP %d dBm, SNR %.1lf dB", __func__, ptlv->rsrp, (0.1) * (double)ptlv->snr);
 
             printf("CMD=SIGNALINFO,MODE=NR5G-NSA,RSRP=%d\n", ptlv->rsrp);
+            fflush(stdout);
         }
     }
 
@@ -2223,6 +2230,7 @@ static int requestGetSignalInfo(void)
             dbg_time("%s 5G_SA: NR5G_RSRQ %d dB", __func__, ptlv->nr5g_rsrq);
 
             printf("CMD=SIGNALINFO,MODE=NR5G-SA,RSRQ=%d\n", ptlv->nr5g_rsrq);
+            fflush(stdout);
         }
     }
 
