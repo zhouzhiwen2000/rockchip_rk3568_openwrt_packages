@@ -53,7 +53,8 @@ static void usbnet_link_change(int link, PROFILE_T *profile) {
         if(profile->rawIP!=0) {
             snprintf(cmd, 255, "ifconfig %s down", profile->usbnet_adapter);
             system(cmd);
-            fp = fopen("/sys/class/%s/qmi/raw_ip", "w");
+            snprintf(cmd, 255, "/sys/class/net/%s/qmi/raw_ip", profile->usbnet_adapter);
+            fp = fopen(cmd, "w");
             if(fp!=NULL) {
                 fprintf(fp, "Y");
                 fclose(fp);
