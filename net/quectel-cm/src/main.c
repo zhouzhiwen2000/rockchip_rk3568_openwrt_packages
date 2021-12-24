@@ -35,6 +35,9 @@ extern void ql_stop_usbmon_log(PROFILE_T *profile);
 //UINT ifc_get_addr(const char *ifname);
 static int s_link = -1;
 static void usbnet_link_change(int link, PROFILE_T *profile) {
+    char cmd[256] = {0};
+    FILE *fp;
+
     if (s_link == link)
         return;
 
@@ -47,6 +50,17 @@ static void usbnet_link_change(int link, PROFILE_T *profile) {
         memset(&profile->ipv6, 0, sizeof(IPV6_T));
 
     if (link) {
+        if(profile->rawIP!=0) {
+            snprintf(cmd, 255, "ifconfig %s down", profile->usbnet_adapter);
+            system(cmd);
+            fp = fopen("/sys/class/%s/qmi/raw_ip", "w");
+            if(fp!=NULL) {
+                fprintf(fp, "Y");
+                fclose(fp);
+            }
+            snprintf(cmd, 255, "ifconfig %s up", profile->usbnet_adapter);
+            system(cmd);
+        }
         //udhcpc_start(profile);
     } else {
         //udhcpc_stop(profile);
