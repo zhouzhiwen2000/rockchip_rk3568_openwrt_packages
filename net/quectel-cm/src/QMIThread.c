@@ -1019,6 +1019,9 @@ static int requestGetSIMStatus(SIM_Status *pSIMStatus) { //RIL_REQUEST_GET_SIM_S
     }
     dbg_time("%s SIMStatus: %s", __func__, SIM_Status_String[*pSIMStatus]);
 
+    printf("CMD=SIMSTATUS,STATE=%d\n", *pSIMStatus);
+    fflush(stdout);
+
     free(pResponse);
 
     return 0;

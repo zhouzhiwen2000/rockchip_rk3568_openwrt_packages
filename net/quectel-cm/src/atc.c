@@ -309,6 +309,9 @@ static int requestGetSIMStatus(SIM_Status *pSIMStatus)
 
     ret = SIM_READY;
 
+    printf("CMD=SIMSTATUS,STATE=%d\n", ret);
+    fflush(stdout);
+
 done:
     safe_at_response_free(p_response);
     *pSIMStatus = ret;

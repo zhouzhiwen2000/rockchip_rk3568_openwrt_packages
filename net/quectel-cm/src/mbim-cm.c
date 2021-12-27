@@ -2280,6 +2280,9 @@ static int requestGetSIMStatus(SIM_Status *pSIMStatus)
         default: *pSIMStatus = SIM_ABSENT; break;
     }
 
+    printf("CMD=SIMSTATUS,STATE=%d\n", *pSIMStatus);
+    fflush(stdout);
+
 exit:
     return retval;
 }
