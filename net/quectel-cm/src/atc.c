@@ -56,13 +56,21 @@ static int atc_init(PROFILE_T *profile) {
     char *cmd;
     ATResponse *p_response = NULL;
 
+    while(1) {
+        err = at_handshake();
 
-    err = at_handshake();
-    if (err) {
-        dbg_time("handshake fail, TODO ... ");
-        goto exit;
+        if (err==0) {
+            break;
+        }
+        else if(err == EAGAIN) {
+            usleep(1000000);
+        }
+        else {
+            dbg_time("handshake fail, TODO ... ");
+            goto exit;
+        }
     }
-	
+
     s_pdp = profile->pdp;
     at_send_command_singleline("AT+QCFG=\"usbnet\"", "+QCFG:", NULL);
     at_send_command_multiline("AT+QNETDEVCTL=?", "+QNETDEVCTL:", NULL);
