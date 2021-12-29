@@ -62,7 +62,7 @@ static int atc_init(PROFILE_T *profile) {
         if (err==0) {
             break;
         }
-        else if(err == EAGAIN) {
+        else if(errno == EAGAIN) {
             usleep(1000000);
         }
         else {
