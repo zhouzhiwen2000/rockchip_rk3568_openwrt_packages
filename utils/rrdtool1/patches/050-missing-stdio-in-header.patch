@@ -1,0 +1,10 @@
+--- a/src/rrd.h       2005-04-26 06:03:43.000000000 +0900
++++ b/src/rrd.h       2021-12-31 21:26:03.939747775 +0900
+@@ -17,6 +17,7 @@
+ #define _RRDLIB_H
+ 
+ #include <time.h>
++#include <stdio.h>
+ 
+ /* Transplanted from rrd_format.h */
+ typedef double       rrd_value_t;         /* the data storage type is
