@@ -8,5 +8,5 @@ start() {
 }
 
 stop() {
-	killall -9 pcat-manager
+	killall pcat-manager
 }
