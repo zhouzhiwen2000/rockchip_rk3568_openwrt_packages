@@ -8,11 +8,8 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=rrdtool
-PKG_VERSION:=0.1.15
+PKG_VERSION:=1.7.2
 PKG_RELEASE:=1
-
-PYPI_NAME:=$(PKG_NAME)
-PKG_HASH:=5e818ed5b5c656448f2e641af04e1f4e
 
 PKG_LICENSE:=LGPL-2.1
 PKG_LICENSE_FILES:=LICENSE
@@ -20,7 +17,6 @@ PKG_MAINTAINER:= Christian Kröger
 
 PKG_BUILD_DEPENDS:=rrdtool1
 
-include ../pypi.mk
 include $(INCLUDE_DIR)/package.mk
 include ../python3-package.mk
 
