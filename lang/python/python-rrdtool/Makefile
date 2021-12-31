@@ -18,7 +18,7 @@ PKG_LICENSE:=LGPL-2.1
 PKG_LICENSE_FILES:=LICENSE
 PKG_MAINTAINER:= Christian Kröger
 
-PKG_BUILD_DEPENDS:=librrd1
+PKG_BUILD_DEPENDS:=rrdtool1
 
 include ../pypi.mk
 include $(INCLUDE_DIR)/package.mk
@@ -40,6 +40,8 @@ shipped with the RRDtool distribution. This project is
 maintained separately to provide a more pythonic way to install
 those bindings via PyPI.
 endef
+
+TARGET_CFLAGS += -I$(STAGING_DIR)/usr/lib/rrdtool-1.0/include
 
 $(eval $(call Py3Package,python3-rrdtool))
 $(eval $(call BuildPackage,python3-rrdtool))
