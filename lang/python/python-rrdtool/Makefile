@@ -7,16 +7,16 @@
 
 include $(TOPDIR)/rules.mk
 
-PKG_NAME:=python-rrdtool
-PKG_VERSION:=1.4.7
+PKG_NAME:=rrdtool
+PKG_VERSION:=0.1.15
 PKG_RELEASE:=1
 
-PYPI_NAME:=python-rrdtool
-PKG_HASH:=7112a594ccd7759d59eaebf061ddacbd
+PYPI_NAME:=$(PKG_NAME)
+PKG_HASH:=5e818ed5b5c656448f2e641af04e1f4e
 
-PKG_LICENSE:=LGPL-3.0-or-later
+PKG_LICENSE:=LGPL-2.1
 PKG_LICENSE_FILES:=LICENSE
-PKG_MAINTAINER:= pbnan
+PKG_MAINTAINER:= Christian Kröger
 
 include ../pypi.mk
 include $(INCLUDE_DIR)/package.mk
@@ -26,15 +26,17 @@ define Package/python3-rrdtool
   SECTION:=lang
   CATEGORY:=Languages
   SUBMENU:=Python
-  TITLE:=Working Python RRDTool binding
-  URL:=https://pypi.org/project/python-rrdtool
+  TITLE:=Python bindings for rrdtool
+  URL:=https://pypi.org/project/rrdtool
   DEPENDS:=+python3 +rrdtool1
 endef
 
-define Package/python3-rrd/description
-This is a working Python Package of RRDtool binding to Python.
-It delivers the same API as original binding (actually, it IS
-original binding, but installable via pip.)
+define Package/python3-rrdtool/description
+The bindings are based on the code of the original Python 2
+bindings module for rrdtool by Hye-Shik Chang and are now
+shipped with the RRDtool distribution. This project is
+maintained separately to provide a more pythonic way to install
+those bindings via PyPI.
 endef
 
 $(eval $(call Py3Package,python3-rrdtool))
