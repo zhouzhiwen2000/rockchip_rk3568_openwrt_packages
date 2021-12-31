@@ -1,0 +1,9 @@
+--- a/setup.py	2012-06-19 17:31:25.000000000 +0900
++++ b/setup.py	2021-12-31 20:13:46.266669133 +0900
+@@ -58,7 +58,7 @@
+             if executable:
+                 import subprocess
+                 executable = os.path.abspath(executable)
+-                os.chmod(executable, 0777)
++                os.chmod(executable, 0o777)
+                 subprocess.check_call(executable, cwd=os.path.dirname(executable))
