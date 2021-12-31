@@ -18,6 +18,8 @@ PKG_LICENSE:=LGPL-2.1
 PKG_LICENSE_FILES:=LICENSE
 PKG_MAINTAINER:= Christian Kröger
 
+PKG_BUILD_DEPENDS:=librrd1
+
 include ../pypi.mk
 include $(INCLUDE_DIR)/package.mk
 include ../python3-package.mk
@@ -28,7 +30,7 @@ define Package/python3-rrdtool
   SUBMENU:=Python
   TITLE:=Python bindings for rrdtool
   URL:=https://pypi.org/project/rrdtool
-  DEPENDS:=+python3 +rrdtool1
+  DEPENDS:=+python3
 endef
 
 define Package/python3-rrdtool/description
