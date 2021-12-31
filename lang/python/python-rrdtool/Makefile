@@ -28,7 +28,7 @@ define Package/python3-rrdtool
   SUBMENU:=Python
   TITLE:=Working Python RRDTool binding
   URL:=https://pypi.org/project/python-rrdtool
-  DEPENDS:=+python3 +rrdtool
+  DEPENDS:=+python3 +rrdtool1
 endef
 
 define Package/python3-rrd/description
