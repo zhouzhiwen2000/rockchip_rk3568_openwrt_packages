@@ -10,3 +10,8 @@ start() {
 stop() {
 	killall pcat-manager
 }
+
+shutdown() {
+	touch /tmp/pcat-manager-shutdown.tmp
+	stop
+}
