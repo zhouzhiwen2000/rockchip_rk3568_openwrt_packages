@@ -35,7 +35,6 @@ COLLECTD_PLUGINS_DISABLED:= \
 	apple_sensors \
 	aquaero \
 	barometer \
-	battery \
 	buddyinfo \
 	capabilities \
 	ceph \
@@ -137,6 +136,7 @@ COLLECTD_PLUGINS_SELECTED:= \
 	apache \
 	apcups \
 	ascent \
+	battery \
 	bind \
 	chrony \
 	conntrack \
