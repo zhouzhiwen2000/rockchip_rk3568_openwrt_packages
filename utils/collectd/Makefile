@@ -35,6 +35,7 @@ COLLECTD_PLUGINS_DISABLED:= \
 	apple_sensors \
 	aquaero \
 	barometer \
+	battery \
 	buddyinfo \
 	capabilities \
 	ceph \
@@ -136,7 +137,6 @@ COLLECTD_PLUGINS_SELECTED:= \
 	apache \
 	apcups \
 	ascent \
-	battery \
 	bind \
 	chrony \
 	conntrack \
@@ -429,7 +429,6 @@ $(eval $(call BuildPackage,collectd))
 $(eval $(call BuildPlugin,apache,apache status input,apache,+PACKAGE_collectd-mod-apache:libcurl))
 $(eval $(call BuildPlugin,apcups,apcups status input,apcups,))
 $(eval $(call BuildPlugin,ascent,ascent status input,ascent,+PACKAGE_collectd-mod-ascent:libcurl +PACKAGE_collectd-mod-ascent:libxml2))
-$(eval $(call BuildPlugin,battery,battery status input,battery,))
 $(eval $(call BuildPlugin,bind,BIND server/zone input,bind,+PACKAGE_collectd-mod-bind:libcurl +PACKAGE_collectd-mod-bind:libxml2))
 $(eval $(call BuildPlugin,chrony,chrony status input,chrony,))
 $(eval $(call BuildPlugin,conntrack,connection tracking table size input,conntrack,))
