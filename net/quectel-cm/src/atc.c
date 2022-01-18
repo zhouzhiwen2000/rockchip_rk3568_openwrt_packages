@@ -109,7 +109,8 @@ static int atc_init(PROFILE_T *profile) {
     if (!at_response_error(err, p_response)) {
         char *fnn = "", *snn = "", *spn = "", *rplmn = "";
         int alphabet = 0;
-        err = at_tok_scanf(p_cur->line, "%s%s%s%d%s", &fnn, &snn, &spn, &alphabet, &rplmn);
+        err = at_tok_scanf(p_response->p_intermediates->line,
+            "%s%s%s%d%s", &fnn, &snn, &spn, &alphabet, &rplmn);
         if (err >= 5) {
             printf("CMD=ISPINFO,FNN=%s,SNN=%s,SPN=%s,ALPHABET=%d,RPLMN=%s\n",
                 fnn, snn, spn, alphabet, rplmn);
