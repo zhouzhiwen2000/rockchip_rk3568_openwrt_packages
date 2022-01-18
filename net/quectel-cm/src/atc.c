@@ -105,20 +105,6 @@ static int atc_init(PROFILE_T *profile) {
     }
     safe_at_response_free(p_response);
 
-    err = at_send_command_singleline("AT+QSPN", "+QSPN:", &p_response);
-    if (!at_response_error(err, p_response)) {
-        char *fnn = "", *snn = "", *spn = "", *rplmn = "";
-        int alphabet = 0;
-        err = at_tok_scanf(p_response->p_intermediates->line,
-            "%s%s%s%d%s", &fnn, &snn, &spn, &alphabet, &rplmn);
-        if (err >= 5) {
-            printf("CMD=ISPINFO,FNN=%s,SNN=%s,SPN=%s,ALPHABET=%d,RPLMN=%s\n",
-                fnn, snn, spn, alphabet, rplmn);
-            fflush(stdout);
-        }
-    }
-    safe_at_response_free(p_response);
-
 exit:
     return err;
 }
@@ -1035,6 +1021,20 @@ static int requestGetSignalInfo(void) {
 
     if (verbose)
         dbg_time("cops_act=%d, nr5g_nsa=%d, nr5g_sa=%d", cops_act, is_nr5g_nsa, nr5g_sa);
+
+    err = at_send_command_singleline("AT+QSPN", "+QSPN:", &p_response);
+    if (!at_response_error(err, p_response)) {
+        char *fnn = "", *snn = "", *spn = "", *rplmn = "";
+        int alphabet = 0;
+        err = at_tok_scanf(p_response->p_intermediates->line,
+            "%s%s%s%d%s", &fnn, &snn, &spn, &alphabet, &rplmn);
+        if (err >= 5) {
+            printf("CMD=ISPINFO,FNN=%s,SNN=%s,SPN=%s,ALPHABET=%d,RPLMN=%s\n",
+                fnn, snn, spn, alphabet, rplmn);
+            fflush(stdout);
+        }
+    }
+    safe_at_response_free(p_response);
 
 _error:
     safe_at_response_free(p_response);
