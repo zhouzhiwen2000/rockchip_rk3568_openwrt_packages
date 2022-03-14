@@ -1786,6 +1786,8 @@ static int requestRegistrationState(UCHAR *pPSAttachedState) {
     dbg_time("%s MCC: %d, MNC: %d, PS: %s, DataCap: %s", __func__,
         MobileCountryCode, MobileNetworkCode, (*pPSAttachedState == 1) ? "Attached" : "Detached" , pDataCapStr);
 
+    printf("CMD=ISPINFO,FNN=none,SNN=none,SPN=none,ALPHABET=0,RPLMN=%d%02d\n", MobileCountryCode, MobileNetworkCode);
+
     free(pResponse);
 
     return 0;
