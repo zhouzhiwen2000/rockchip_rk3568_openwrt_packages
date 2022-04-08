@@ -28,7 +28,7 @@ define Build/Configure
 endef
 
 define Build/Compile
-	$(TARGET_CC) $(TARGET_CFLAGS) $(TARGET_LDFLAGS) -o $(PKG_BUILD_DIR)/vendor_storage $(PKG_BUILD_DIR)/vendor_strage.c
+	$(TARGET_CC) $(TARGET_CFLAGS) $(TARGET_LDFLAGS) -o $(PKG_BUILD_DIR)/vendor_storage $(PKG_BUILD_DIR)/vendor_storage.c
 endef
 
 define Package/rktoolkit/install
