@@ -1,13 +1,13 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=pcat-manager
-PKG_VERSION:=1.0.2
+PKG_VERSION:=1.0.7
 PKG_RELEASE:=0
 
 PKG_SOURCE_PROTO:=git
 PKG_SOURCE_URL:=ssh://git@git.g77k.com/supercatexpert/pcat-manager.git
-PKG_SOURCE_DATE:=2022-07-12
-PKG_SOURCE_VERSION:=944484bdddb71782a7a9ee62699975504d0acbeb
+PKG_SOURCE_DATE:=2022-08-30
+PKG_SOURCE_VERSION:=60896c04bd94a0c4e4df3f53d1cf5b9c3c6e3191
 
 PKG_LICENSE:=GPL-3.0
 PKG_LICENSE_FILES:=LICENSE
@@ -38,6 +38,9 @@ define Package/pcat-manager/install
 	$(INSTALL_BIN) \
 		$(PKG_INSTALL_DIR)/usr/bin/pcat-manager \
 		$(1)/usr/bin/pcat-manager
+
+	$(INSTALL_DIR) $(1)/etc
+	$(INSTALL_CONF) ./files/pcat-manager.conf $(1)/etc
 
 	$(INSTALL_DIR) $(1)/etc/init.d
 	$(INSTALL_BIN) ./files/pcat-manager.init $(1)/etc/init.d/pcat-manager
