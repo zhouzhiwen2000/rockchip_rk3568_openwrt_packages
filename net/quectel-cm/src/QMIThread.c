@@ -1685,6 +1685,11 @@ static int requestRegistrationState2(UCHAR *pPSAttachedState) {
         }
     }
 
+    if(*pPSAttachedState==1)
+    {
+        printf("CMD=ISPINFO,FNN=none,SNN=none,SPN=none,ALPHABET=0,RPLMN=%d%02d\n", MobileCountryCode, MobileNetworkCode);
+    }
+
     dbg_time("%s MCC: %d, MNC: %d, PS: %s, DataCap: %s", __func__,
         MobileCountryCode, MobileNetworkCode, (*pPSAttachedState == 1) ? "Attached" : "Detached" , pDataCapStr);
 
