@@ -1,13 +1,13 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=pcat-manager
-PKG_VERSION:=1.0.7
+PKG_VERSION:=1.0.9
 PKG_RELEASE:=0
 
 PKG_SOURCE_PROTO:=git
-PKG_SOURCE_URL:=ssh://git@git.g77k.com/supercatexpert/pcat-manager.git
-PKG_SOURCE_DATE:=2022-08-30
-PKG_SOURCE_VERSION:=60896c04bd94a0c4e4df3f53d1cf5b9c3c6e3191
+PKG_SOURCE_URL:=https://github.com/photonicat/rockchip_rk3568_pcat_manager.git
+PKG_SOURCE_DATE:=2022-09-18
+PKG_SOURCE_VERSION:=3c79dc498aeb35e2c112f1a09f55ecb1637ce7c1
 
 PKG_LICENSE:=GPL-3.0
 PKG_LICENSE_FILES:=LICENSE

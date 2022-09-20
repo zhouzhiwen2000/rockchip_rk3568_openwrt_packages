@@ -7,6 +7,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=quectel-cm
+PKG_VERSION:=1.0.1
 PKG_RELEASE:=1
 
 PKG_MAINTAINER:=Kyosuke Nekoyashiki <supercatexpert@gmail.com>
