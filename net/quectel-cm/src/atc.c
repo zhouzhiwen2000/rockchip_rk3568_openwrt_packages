@@ -900,12 +900,12 @@ static int requestGetSignalInfo(void) {
         if (!strcmp(state, "NOCONN") || !strcmp(state, "CONNECT")) {
             err = at_tok_scanf(p_cur->line, "%s%s%s", &type, &state, &rat);
             if (err != 3)
-                continue;        
+                continue;
         }
         else {
             rat = state;
         }
-       
+
         if (!strcmp(rat, "NR5G-SA"))
         {
             //+QENG: "servingcell",<state>,"NR5G-SA",<duplex_mode>,<MCC>,<MNC>,<cellID>,<PCID>,<TAC>,<ARFCN>,<band>,<NR_DL_bandwidth>,<RSRP>,<RSRQ>,<SINR>,<tx_power>,<srxlev> 
@@ -947,7 +947,7 @@ static int requestGetSignalInfo(void) {
                 int pcid, rsrp, sinr, rsrq;
             };
             struct qeng_servingcell_nr5g_nsa nr5g_nsa;
-           
+
             memset(&nr5g_nsa, 0, sizeof(nr5g_nsa));
             err = at_tok_scanf(p_cur->line, "%s%s%s%s%d%d%d%dd",
                 NULL, NULL, &nr5g_nsa.mcc, &nr5g_nsa.mnc, &nr5g_nsa.pcid, &nr5g_nsa.rsrp, &nr5g_nsa.sinr, &nr5g_nsa.rsrq);
@@ -1000,6 +1000,33 @@ static int requestGetSignalInfo(void) {
                 fflush(stdout);
             }
 
+        }
+        else if (!strcmp(rat, "WCDMA"))
+        {
+            //+QENG: "servingcell",<state>,"WCDMA",<MCC>,<MNC>,<LAC>,<cellID>,<uarfcn>,<PSC>,<RSCP>,<ecio>,<phych>,<SF>,<slot>
+            struct qeng_servingcell_wcdma {
+                char *cell_type, *state, *rat;
+                int MCC, MNC, LAC, cellID/*hex*/;
+                int uarfcn, PSC, RAC, RSCP, ecio, phych, SF, slot;
+            };
+            struct qeng_servingcell_wcdma wcdma;
+
+            memset(&wcdma, 0, sizeof(wcdma));
+            err = at_tok_scanf(p_cur->line, "%s,%s,%s,%d,%d,%x,%x,%d,%d,%d,%d,%d,%d,%d",
+                &wcdma.cell_type, &wcdma.state, &wcdma.rat, &wcdma.MCC, &wcdma.MNC, &wcdma.LAC,
+                &wcdma.cellID, &wcdma.uarfcn, &wcdma.PSC, &wcdma.RSCP, &wcdma.ecio,
+                &wcdma.phych, &wcdma.SF, &wcdma.slot);
+
+            if(err >= 14) {
+                printf("CMD=SIGNALINFO,MODE=WCDMA,RSCP=%d,ECIO=%d\n", wcdma.RSCP, wcdma.ecio);
+                fflush(stdout);
+            }
+
+        }
+        else
+        {
+            printf("CMD=SIGNALINFO,MODE=%s\n", rat);
+            fflush(stdout);
         }
     }
 

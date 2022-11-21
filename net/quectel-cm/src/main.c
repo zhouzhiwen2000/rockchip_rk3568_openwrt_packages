@@ -62,8 +62,32 @@ static void usbnet_link_change(int link, PROFILE_T *profile) {
             snprintf(cmd, 255, "ifconfig %s up", profile->usbnet_adapter);
             system(cmd);
         }
+
+        if(strcmp(profile->usbnet_adapter, "usb0")==0) {
+            system("ubus call network.interface.wwan_5g down");
+            system("ubus call network.interface.wwan_5g_v6 down");
+            sleep(2);
+            system("ubus call network.interface.wwan_5g up");
+            system("ubus call network.interface.wwan_5g_v6 up");
+        }
+        else if(strcmp(profile->usbnet_adapter, "wwan0")==0) {
+            system("ubus call network.interface.wwan_lte down");
+            system("ubus call network.interface.wwan_lte_v6 down");
+            sleep(2);
+            system("ubus call network.interface.wwan_lte up");
+            system("ubus call network.interface.wwan_lte_v6 up");
+        }
+
         //udhcpc_start(profile);
     } else {
+        if(strcmp(profile->usbnet_adapter, "usb0")==0) {
+            system("ubus call network.interface.wwan_5g down");
+            system("ubus call network.interface.wwan_5g_v6 down");
+        }
+        else if(strcmp(profile->usbnet_adapter, "wwan0")==0) {
+            system("ubus call network.interface.wwan_lte down");
+            system("ubus call network.interface.wwan_lte_v6 down");
+        }
         //udhcpc_stop(profile);
     }
 }
@@ -680,6 +704,9 @@ static int quectel_CM(PROFILE_T *profile)
         dbg_time("qmidevice_detect failed");
         goto error;
     }
+
+    /* Workaround: sleep 3s to wait device initialization. */
+    sleep(3);
 
     strncpy(profile->qmichannel, qmichannel, sizeof(profile->qmichannel));
     profile->qmichannel[sizeof(profile->qmichannel)-1] = 0;

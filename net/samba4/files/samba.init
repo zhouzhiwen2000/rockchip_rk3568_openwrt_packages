@@ -36,7 +36,7 @@ smb_header() {
 	config_get_bool DISABLE_NETBIOS "$1" disable_netbios 0
 	config_get_bool DISABLE_AD_DC "$1" disable_ad_dc 0
 	config_get_bool DISABLE_WINBIND "$1" disable_winbind 0
-	config_get_bool DISABLE_ASYNC_IO "$1" disable_async_io 0
+	config_get_bool DISABLE_ASYNC_IO "$1" disable_async_io 1
 	config_get_bool ALLOW_LEGACY_PROTOCOLS "$1" allow_legacy_protocols 0
 	config_get_bool ENABLE_EXTRA_TUNING "$1" enable_extra_tuning 0
 
